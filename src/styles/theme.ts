@@ -21,8 +21,10 @@ export const theme = extendTheme({
   },
   styles: {
     global: {
-      bg: 'gray.900',
-      color: 'gray.50',
+      body: {
+        backgroundColor: 'gray.900',
+        color: 'gray.50',
+      },
     },
   },
 });
