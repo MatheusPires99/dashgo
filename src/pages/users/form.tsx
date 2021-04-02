@@ -9,7 +9,7 @@ import {
   Button,
 } from '@chakra-ui/react';
 
-import { Header, SideBar } from '../../components';
+import { Header, Sidebar } from '../../components';
 import { Input } from '../../components/Form';
 
 export default function UserForm() {
@@ -18,7 +18,7 @@ export default function UserForm() {
       <Header />
 
       <Flex as="main" w="100%" my="6" maxWidth={1480} mx="auto" px="6">
-        <SideBar />
+        <Sidebar />
 
         <Box flex="1" borderRadius={8} bg="gray.800" p="8">
           <Heading size="lg" fontWeight="normal">

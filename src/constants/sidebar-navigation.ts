@@ -6,7 +6,7 @@ import {
   RiInputMethodLine,
 } from 'react-icons/ri';
 
-type SidebarLink = {
+export type SidebarLink = {
   text: string;
   icon: IconType;
 };

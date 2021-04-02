@@ -2,7 +2,7 @@ import dynamic from 'next/dynamic';
 
 import { Box, Flex, SimpleGrid, Text } from '@chakra-ui/react';
 
-import { Header, SideBar } from '../components';
+import { Header, Sidebar } from '../components';
 import { CHART_OPTIONS } from '../config';
 import { DASHBOARD_CHARTS } from '../constants';
 
@@ -14,7 +14,7 @@ export default function Dashboard() {
       <Header />
 
       <Flex as="main" w="100%" my="6" maxWidth={1480} mx="auto" px="6">
-        <SideBar />
+        <Sidebar />
 
         <SimpleGrid flex="1" align="flex-start" gap="4" minChildWidth={320}>
           {DASHBOARD_CHARTS.map(chart => (

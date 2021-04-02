@@ -12,6 +12,7 @@ export function Pagination() {
       <HStack spacing="2">
         {PAGINATION.map(item => (
           <Button
+            key={item.page}
             size="sm"
             fontSize="xs"
             width="4"

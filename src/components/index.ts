@@ -1,3 +1,3 @@
 export { Header } from './Header';
-export { SideBar } from './SideBar';
+export { Sidebar } from './Sidebar';
 export { Pagination } from './Pagination';
