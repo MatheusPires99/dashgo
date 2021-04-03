@@ -1,23 +1,28 @@
+import { ElementType, ReactNode } from 'react';
+import Link from 'next/link';
+
 import {
   Icon,
-  Link,
+  Link as ChakraLink,
   Text,
   LinkProps as ChakraLinkProps,
 } from '@chakra-ui/react';
 
-import { SidebarLink } from '../../constants/sidebar-navigation';
-
 type NavLinkProps = ChakraLinkProps & {
-  link: SidebarLink;
+  href: string;
+  icon: ElementType;
+  children: ReactNode;
 };
 
-export function NavLink({ link, ...rest }: NavLinkProps) {
+export function NavLink({ href, icon, children, ...rest }: NavLinkProps) {
   return (
-    <Link key={link.text} display="flex" align="center" {...rest}>
-      <Icon as={link.icon} fontSize="20" />
-      <Text ml="4" fontWeight="medium">
-        {link.text}
-      </Text>
+    <Link href={href} passHref>
+      <ChakraLink display="flex" align="center" {...rest}>
+        <Icon as={icon} fontSize="20" />
+        <Text ml="4" fontWeight="medium">
+          {children}
+        </Text>
+      </ChakraLink>
     </Link>
   );
 }

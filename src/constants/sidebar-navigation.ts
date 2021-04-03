@@ -8,6 +8,7 @@ import {
 
 export type SidebarLink = {
   text: string;
+  path: string;
   icon: IconType;
 };
 
@@ -22,10 +23,12 @@ export default [
     links: [
       {
         text: 'Dashboard',
+        path: '/dashboard',
         icon: RiDashboardLine,
       },
       {
         text: 'Usuários',
+        path: '/users',
         icon: RiContactsLine,
       },
     ],
@@ -35,10 +38,12 @@ export default [
     links: [
       {
         text: 'Formulários',
+        path: '/forms',
         icon: RiInputMethodLine,
       },
       {
         text: 'Automação',
+        path: '/automation',
         icon: RiGitMergeLine,
       },
     ],

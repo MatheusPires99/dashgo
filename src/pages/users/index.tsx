@@ -23,7 +23,11 @@ export default function UserList() {
   });
 
   return (
-    <TableWrapper title="Usuários" createButtonText="Criar usuário">
+    <TableWrapper
+      title="Usuários"
+      createButtonHref="/users/form"
+      createButtonText="Criar usuário"
+    >
       <Thead>
         <Tr>
           <Th px={['4', '4', '6']} color="gray.300" w="8">

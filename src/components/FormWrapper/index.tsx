@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+import { useRouter } from 'next/router';
 
 import { Flex, Box, Heading, Divider, HStack, Button } from '@chakra-ui/react';
 
@@ -8,6 +9,8 @@ type FormWrapperProps = {
 };
 
 export function FormWrapper({ title, children }: FormWrapperProps) {
+  const router = useRouter();
+
   return (
     <Box flex="1" borderRadius={8} bg="gray.800" p="8">
       <Heading size="lg" fontWeight="normal">
@@ -21,7 +24,9 @@ export function FormWrapper({ title, children }: FormWrapperProps) {
 
         <Flex mt="8" justify="flex-end">
           <HStack spacing="4">
-            <Button colorScheme="whiteAlpha">Cancelar</Button>
+            <Button onClick={() => router.back()} colorScheme="whiteAlpha">
+              Cancelar
+            </Button>
             <Button type="submit" colorScheme="pink">
               Salvar
             </Button>
