@@ -6,8 +6,9 @@ import {
   FormLabel,
   Input as ChakraInput,
   InputProps as ChakraInputProps,
-  FormErrorMessage,
 } from '@chakra-ui/react';
+
+import { ErrorMessage } from '../ErrorMessage';
 
 type InputProps = ChakraInputProps & {
   name: string;
@@ -37,7 +38,7 @@ const RefInput: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
         {...rest}
       />
 
-      {!!error && <FormErrorMessage>{error.message}</FormErrorMessage>}
+      {!!error && <ErrorMessage>{error.message}</ErrorMessage>}
     </FormControl>
   );
 };
