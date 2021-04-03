@@ -3,7 +3,7 @@ import { ReactNode } from 'react';
 import { Button, Flex, Heading, Box, Icon, Table } from '@chakra-ui/react';
 import { RiAddLine } from 'react-icons/ri';
 
-import { Pagination } from './Pagination';
+import { Pagination } from '../Pagination';
 
 type TableWrapperProps = {
   title: string;
