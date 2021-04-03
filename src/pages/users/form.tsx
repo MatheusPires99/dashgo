@@ -1,25 +1,11 @@
-import {
-  Flex,
-  Box,
-  Heading,
-  Divider,
-  VStack,
-  SimpleGrid,
-  HStack,
-  Button,
-} from '@chakra-ui/react';
+import { VStack, SimpleGrid } from '@chakra-ui/react';
 
+import { FormWrapper } from '../../components';
 import { Input } from '../../components/Form';
 
 export default function UserForm() {
   return (
-    <Box flex="1" borderRadius={8} bg="gray.800" p="8">
-      <Heading size="lg" fontWeight="normal">
-        Criar usuário
-      </Heading>
-
-      <Divider my="6" borderColor="gray.700" />
-
+    <FormWrapper title="     Criar usuário">
       <VStack spacing="8">
         <SimpleGrid minChildWidth={240} spacing="8" w="100%">
           <Input name="name" label="Nome completo" />
@@ -35,13 +21,6 @@ export default function UserForm() {
           />
         </SimpleGrid>
       </VStack>
-
-      <Flex mt="8" justify="flex-end">
-        <HStack spacing="4">
-          <Button colorScheme="whiteAlpha">Cancelar</Button>
-          <Button colorScheme="pink">Salvar</Button>
-        </HStack>
-      </Flex>
-    </Box>
+    </FormWrapper>
   );
 }
