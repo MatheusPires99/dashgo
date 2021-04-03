@@ -1,11 +1,7 @@
-import dynamic from 'next/dynamic';
-
 import { Box, SimpleGrid, Text } from '@chakra-ui/react';
 
-import { CHART_OPTIONS } from '../config';
+import { Chart } from '../components';
 import { DASHBOARD_CHARTS } from '../constants';
-
-const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
 export default function Dashboard() {
   return (
@@ -15,12 +11,7 @@ export default function Dashboard() {
           <Text fontSize="lg" mb="4">
             {chart.title}
           </Text>
-          <Chart
-            options={CHART_OPTIONS}
-            series={chart.series}
-            type="area"
-            height={160}
-          />
+          <Chart series={chart.series} />
         </Box>
       ))}
     </SimpleGrid>
