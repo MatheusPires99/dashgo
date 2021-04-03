@@ -5,6 +5,7 @@ import { ChakraProvider } from '@chakra-ui/react';
 
 import { theme } from '../styles/theme';
 import { AuthLayout, DefaultLayout } from '../components/_layouts';
+import { SidebarDrawerProvider } from '../hooks';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const { asPath } = useRouter();
@@ -15,9 +16,11 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <ChakraProvider theme={theme}>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+      <SidebarDrawerProvider>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </SidebarDrawerProvider>
     </ChakraProvider>
   );
 }

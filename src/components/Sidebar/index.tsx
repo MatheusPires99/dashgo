@@ -1,21 +1,46 @@
-import { Box, Stack } from '@chakra-ui/react';
+import {
+  Box,
+  Drawer,
+  DrawerCloseButton,
+  DrawerContent,
+  DrawerOverlay,
+  DrawerHeader,
+  DrawerBody,
+  useBreakpointValue,
+} from '@chakra-ui/react';
 
-import { SIDE_BAR_NAVIGATION } from '../../constants';
-import { NavSection } from './NavSection';
-import { NavLink } from './NavLink';
+import { useSidebarDrawer } from '../../hooks';
+import { SidebarNav } from './SidebarNav';
 
 export function Sidebar() {
+  const isDrawerSidebar = useBreakpointValue({
+    base: true,
+    lg: false,
+  });
+
+  const { isOpen, onClose } = useSidebarDrawer();
+
+  if (isDrawerSidebar) {
+    return (
+      <Drawer isOpen={isOpen} onClose={onClose} placement="left">
+        <DrawerOverlay>
+          <DrawerContent bg="gray.800" p="4">
+            <DrawerCloseButton mt="6" />
+
+            <DrawerHeader>Navegação</DrawerHeader>
+
+            <DrawerBody>
+              <SidebarNav />
+            </DrawerBody>
+          </DrawerContent>
+        </DrawerOverlay>
+      </Drawer>
+    );
+  }
+
   return (
     <Box as="aside" w="64" mr="8">
-      <Stack spacing="12" align="flex-start">
-        {SIDE_BAR_NAVIGATION.map(item => (
-          <NavSection key={item.title} title={item.title}>
-            {item.links.map(link => (
-              <NavLink key={link.text} link={link} />
-            ))}
-          </NavSection>
-        ))}
-      </Stack>
+      <SidebarNav />
     </Box>
   );
 }
