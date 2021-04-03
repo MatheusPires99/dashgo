@@ -11,7 +11,7 @@ export function Sidebar() {
         {SIDE_BAR_NAVIGATION.map(item => (
           <NavSection key={item.title} title={item.title}>
             {item.links.map(link => (
-              <NavLink link={link} />
+              <NavLink key={link.text} link={link} />
             ))}
           </NavSection>
         ))}
