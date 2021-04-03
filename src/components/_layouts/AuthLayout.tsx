@@ -11,7 +11,6 @@ export function AuthLayout({ children }: AuthLayoutProps) {
     <Flex w="100vw" h="100vh" align="center" justify="center">
       <Flex
         flexDir="column"
-        as="form"
         w="100%"
         maxWidth={360}
         bg="gray.800"
