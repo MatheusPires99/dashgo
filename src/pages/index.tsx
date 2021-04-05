@@ -3,7 +3,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import { Input } from '../components/Form';
-import { signInFormSchema } from '../schemas';
+import { SIGN_IN_FORM_SCHEMA } from '../schemas';
 
 type SignInFormData = {
   email: string;
@@ -12,8 +12,10 @@ type SignInFormData = {
 
 export default function SignIn() {
   const { handleSubmit, register, formState } = useForm({
-    resolver: yupResolver(signInFormSchema),
+    resolver: yupResolver(SIGN_IN_FORM_SCHEMA),
   });
+
+  const { errors, isSubmitting } = formState;
 
   const handleSignIn: SubmitHandler<SignInFormData> = value => {
     console.log(value);
@@ -26,7 +28,7 @@ export default function SignIn() {
           name="email"
           type="email"
           label="E-mail"
-          error={formState.errors.email}
+          error={errors.email}
           {...register('email')}
         />
 
@@ -34,7 +36,7 @@ export default function SignIn() {
           name="password"
           type="password"
           label="Senha"
-          error={formState.errors.password}
+          error={errors.password}
           {...register('password')}
         />
       </Stack>
@@ -44,7 +46,7 @@ export default function SignIn() {
         mt="6"
         colorScheme="pink"
         size="lg"
-        isLoading={formState.isSubmitting}
+        isLoading={isSubmitting}
       >
         Entrar
       </Button>
