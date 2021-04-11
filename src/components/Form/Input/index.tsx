@@ -8,7 +8,7 @@ import {
   InputProps as ChakraInputProps,
 } from '@chakra-ui/react';
 
-import { ErrorMessage } from '../ErrorMessage';
+import { ErrorMessage } from '..';
 
 type InputProps = ChakraInputProps & {
   name: string;
