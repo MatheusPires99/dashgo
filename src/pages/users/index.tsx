@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import {
   Button,
   Box,
@@ -17,7 +19,8 @@ import { TableWrapper } from '../../components';
 import { useUsers } from '../../services/hooks';
 
 export default function UserList() {
-  const { data, isLoading, isFetching, error } = useUsers();
+  const [page, setPage] = useState(1);
+  const { data, isLoading, isFetching, error } = useUsers(page);
 
   const isWideVersion = useBreakpointValue({
     base: false,
@@ -32,9 +35,9 @@ export default function UserList() {
       isLoading={isLoading}
       isRefetching={isFetching}
       isErrored={!!error}
-      totalItems={200}
-      currentPage={5}
-      onPageChange={() => {}}
+      totalItems={data?.totalCount}
+      currentPage={page}
+      onPageChange={setPage}
     >
       <Thead>
         <Tr>
@@ -48,7 +51,7 @@ export default function UserList() {
       </Thead>
 
       <Tbody>
-        {data?.map(user => (
+        {data?.users?.map(user => (
           <Tr key={user.id}>
             <Td px={['4', '4', '6']}>
               <Checkbox colorScheme="pink" />

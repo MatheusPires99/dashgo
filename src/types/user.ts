@@ -4,3 +4,8 @@ export type User = {
   email: string;
   createdAt: string;
 };
+
+export type PaginatedUsers = {
+  totalCount: number;
+  users: User[];
+};

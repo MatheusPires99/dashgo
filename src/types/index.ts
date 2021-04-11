@@ -1,1 +1,1 @@
-export type { User } from './user';
+export type { User, PaginatedUsers } from './user';

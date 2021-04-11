@@ -57,25 +57,41 @@ export function Pagination({
       <HStack spacing="2">
         {currentPage > 1 + siblingsCount && (
           <>
-            <PaginationItem page={1} />
+            <PaginationItem page={1} onPageChange={onPageChange} />
 
             {currentPage > 2 + siblingsCount && <ThreeDots />}
           </>
         )}
 
         {previousPages.length > 0 &&
-          previousPages.map(page => <PaginationItem key={page} page={page} />)}
+          previousPages.map(page => (
+            <PaginationItem
+              key={page}
+              page={page}
+              onPageChange={onPageChange}
+            />
+          ))}
 
-        <PaginationItem page={currentPage} isCurrent />
+        <PaginationItem
+          page={currentPage}
+          isCurrent
+          onPageChange={onPageChange}
+        />
 
         {nextPages.length > 0 &&
-          nextPages.map(page => <PaginationItem key={page} page={page} />)}
+          nextPages.map(page => (
+            <PaginationItem
+              key={page}
+              page={page}
+              onPageChange={onPageChange}
+            />
+          ))}
 
         {currentPage + siblingsCount < lastPage && (
           <>
             {currentPage + 1 + siblingsCount < lastPage && <ThreeDots />}
 
-            <PaginationItem page={lastPage} />
+            <PaginationItem page={lastPage} onPageChange={onPageChange} />
           </>
         )}
       </HStack>
