@@ -15,13 +15,27 @@ import { useQuery } from 'react-query';
 import { RiPencilLine } from 'react-icons/ri';
 
 import { TableWrapper } from '../../components';
-import { USER_LIST } from '../../constants';
+import { User } from '../../types';
 
 export default function UserList() {
   const { data, isLoading, error } = useQuery('users', async () => {
     const response = await fetch('/api/users');
+    const responseData = await response.json();
 
-    return response.json();
+    const users = responseData.users.map(user => {
+      return {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        createdAt: new Date(user.createdAt).toLocaleDateString('pt-BR', {
+          day: '2-digit',
+          month: 'long',
+          year: 'numeric',
+        }),
+      };
+    });
+
+    return users;
   });
 
   const isWideVersion = useBreakpointValue({
@@ -49,8 +63,8 @@ export default function UserList() {
       </Thead>
 
       <Tbody>
-        {USER_LIST.map(user => (
-          <Tr key={user.email}>
+        {data?.map(user => (
+          <Tr key={user.id}>
             <Td px={['4', '4', '6']}>
               <Checkbox colorScheme="pink" />
             </Td>
