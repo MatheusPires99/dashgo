@@ -21,6 +21,9 @@ type TableWrapperProps = {
   isLoading: boolean;
   isRefetching: boolean;
   isErrored: boolean;
+  totalItems: number;
+  currentPage: number;
+  onPageChange: (page: number) => void;
   children: ReactNode;
 };
 
@@ -31,6 +34,9 @@ export function TableWrapper({
   isLoading,
   isRefetching,
   isErrored,
+  totalItems,
+  currentPage,
+  onPageChange,
   children,
 }: TableWrapperProps) {
   const renderTableContent = useMemo(() => {
@@ -50,10 +56,14 @@ export function TableWrapper({
       <>
         <Table colorScheme="whiteAlpha">{children}</Table>
 
-        <Pagination />
+        <Pagination
+          totalItems={totalItems}
+          currentPage={currentPage}
+          onPageChange={onPageChange}
+        />
       </>
     );
-  }, [children, isErrored, isLoading]);
+  }, [children, currentPage, isErrored, isLoading, onPageChange, totalItems]);
 
   return (
     <Box

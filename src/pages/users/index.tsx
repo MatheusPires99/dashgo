@@ -32,6 +32,9 @@ export default function UserList() {
       isLoading={isLoading}
       isRefetching={isFetching}
       isErrored={!!error}
+      totalItems={200}
+      currentPage={5}
+      onPageChange={() => {}}
     >
       <Thead>
         <Tr>

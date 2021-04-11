@@ -1,9 +1,46 @@
 import { Box, Stack, HStack } from '@chakra-ui/react';
 
-import { PAGINATION } from '../../constants';
 import { PaginationItem } from './PaginationItem';
+import { ThreeDots } from './ThreeDots';
 
-export function Pagination() {
+type PaginationProps = {
+  totalItems: number;
+  itemsPerPage?: number;
+  currentPage?: number;
+  onPageChange: (page: number) => void;
+};
+
+const siblingsCount = 1;
+
+function generatePagesArray(from: number, to: number) {
+  return [...new Array(to - from)]
+    .map((_, index) => {
+      return from + index + 1;
+    })
+    .filter(page => page > 0);
+}
+
+export function Pagination({
+  totalItems,
+  itemsPerPage = 10,
+  currentPage = 1,
+  onPageChange,
+}: PaginationProps) {
+  const lastPage = Math.floor(totalItems / itemsPerPage);
+
+  const previousPages =
+    currentPage > 1
+      ? generatePagesArray(currentPage - 1 - siblingsCount, currentPage - 1)
+      : [];
+
+  const nextPages =
+    currentPage < lastPage
+      ? generatePagesArray(
+          currentPage,
+          Math.min(currentPage + siblingsCount, lastPage),
+        )
+      : [];
+
   return (
     <Stack
       direction={['column', 'row']}
@@ -13,17 +50,34 @@ export function Pagination() {
       align="center"
     >
       <Box>
-        <strong>0</strong> - <strong>10</strong> de <strong>100</strong>
+        <strong>{currentPage}</strong> - <strong>{itemsPerPage}</strong> de{' '}
+        <strong>{lastPage}</strong>
       </Box>
 
       <HStack spacing="2">
-        {PAGINATION.map(item => (
-          <PaginationItem
-            key={item.page}
-            number={item.page}
-            isCurrent={item.selected}
-          />
-        ))}
+        {currentPage > 1 + siblingsCount && (
+          <>
+            <PaginationItem page={1} />
+
+            {currentPage > 2 + siblingsCount && <ThreeDots />}
+          </>
+        )}
+
+        {previousPages.length > 0 &&
+          previousPages.map(page => <PaginationItem key={page} page={page} />)}
+
+        <PaginationItem page={currentPage} isCurrent />
+
+        {nextPages.length > 0 &&
+          nextPages.map(page => <PaginationItem key={page} page={page} />)}
+
+        {currentPage + siblingsCount < lastPage && (
+          <>
+            {currentPage + 1 + siblingsCount < lastPage && <ThreeDots />}
+
+            <PaginationItem page={lastPage} />
+          </>
+        )}
       </HStack>
     </Stack>
   );
