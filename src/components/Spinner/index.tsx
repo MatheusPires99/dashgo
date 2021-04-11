@@ -1,9 +1,13 @@
-import { Flex, Spinner as ChakraSpinner } from '@chakra-ui/react';
+import {
+  Flex,
+  Spinner as ChakraSpinner,
+  SpinnerProps as ChakraSpinnerProps,
+} from '@chakra-ui/react';
 
-export function Spinner() {
+export function Spinner({ ...props }: ChakraSpinnerProps) {
   return (
     <Flex justify="center">
-      <ChakraSpinner />
+      <ChakraSpinner {...props} />
     </Flex>
   );
 }
