@@ -2,6 +2,7 @@ import { AppProps } from 'next/app';
 import { useRouter } from 'next/router';
 
 import { ChakraProvider } from '@chakra-ui/react';
+import { QueryClient, QueryClientProvider } from 'react-query';
 
 import { theme } from '../styles/theme';
 import { AuthLayout, DefaultLayout } from '../components/_layouts';
@@ -12,6 +13,8 @@ if (process.env.NODE_ENV === 'development') {
   makeServer();
 }
 
+const queryClient = new QueryClient();
+
 function MyApp({ Component, pageProps }: AppProps) {
   const { asPath } = useRouter();
 
@@ -20,13 +23,15 @@ function MyApp({ Component, pageProps }: AppProps) {
   const Layout = userIsAuthenticated ? DefaultLayout : AuthLayout;
 
   return (
-    <ChakraProvider theme={theme}>
-      <SidebarDrawerProvider>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
-      </SidebarDrawerProvider>
-    </ChakraProvider>
+    <QueryClientProvider client={queryClient}>
+      <ChakraProvider theme={theme}>
+        <SidebarDrawerProvider>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </SidebarDrawerProvider>
+      </ChakraProvider>
+    </QueryClientProvider>
   );
 }
 
