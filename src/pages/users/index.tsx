@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+
 import {
   Button,
   Box,
@@ -22,6 +24,12 @@ export default function UserList() {
     lg: true,
   });
 
+  useEffect(() => {
+    fetch('/api/users')
+      .then(response => response.json())
+      .then(data => console.log(data));
+  }, []);
+
   return (
     <TableWrapper
       title="Usuários"
@@ -41,7 +49,7 @@ export default function UserList() {
 
       <Tbody>
         {USER_LIST.map(user => (
-          <Tr>
+          <Tr key={user.email}>
             <Td px={['4', '4', '6']}>
               <Checkbox colorScheme="pink" />
             </Td>
