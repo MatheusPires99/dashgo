@@ -19,6 +19,7 @@ type TableWrapperProps = {
   createButtonHref: string;
   createButtonText: string;
   isLoading: boolean;
+  isRefetching: boolean;
   isErrored: boolean;
   children: ReactNode;
 };
@@ -28,6 +29,7 @@ export function TableWrapper({
   createButtonHref,
   createButtonText,
   isLoading,
+  isRefetching,
   isErrored,
   children,
 }: TableWrapperProps) {
@@ -62,9 +64,15 @@ export function TableWrapper({
       overflow={['hidden', 'visible']}
     >
       <Flex mb="8" justify="space-between" align="center">
-        <Heading size="lg" fontWeight="normal">
-          {title}
-        </Heading>
+        <Flex align="center">
+          <Heading size="lg" fontWeight="normal">
+            {title}
+          </Heading>
+
+          {!isLoading && isRefetching && (
+            <Spinner size="sm" color="gray.500" ml="4" />
+          )}
+        </Flex>
 
         <Link href={createButtonHref} passHref>
           <Button

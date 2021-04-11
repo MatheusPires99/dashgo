@@ -19,7 +19,7 @@ import { User } from '../../types';
 import { api } from '../../services';
 
 export default function UserList() {
-  const { data, isLoading, error } = useQuery<User[]>(
+  const { data, isLoading, isFetching, error } = useQuery<User[]>(
     'users',
     async () => {
       const response = await api.get('users');
@@ -55,6 +55,7 @@ export default function UserList() {
       createButtonHref="/users/form"
       createButtonText="Criar usuário"
       isLoading={isLoading}
+      isRefetching={isFetching}
       isErrored={!!error}
     >
       <Thead>
