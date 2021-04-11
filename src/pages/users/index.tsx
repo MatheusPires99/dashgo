@@ -23,8 +23,9 @@ export default function UserList() {
     'users',
     async () => {
       const response = await api.get('users');
+      const usersResponse = response.data as User[];
 
-      const users = response.data.users.map(user => {
+      const users = usersResponse.map(user => {
         return {
           id: user.id,
           name: user.name,
