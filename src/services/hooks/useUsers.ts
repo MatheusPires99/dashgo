@@ -4,10 +4,10 @@ import { User } from '../../types';
 import api from '../api';
 
 async function getUsers(): Promise<User[]> {
-  const response = await api.get('users');
-  const usersResponse = response.data as User[];
+  const { data } = await api.get('users');
+  const usersData = data.users as User[];
 
-  const users = usersResponse.map(user => {
+  const users = usersData.map(user => {
     return {
       id: user.id,
       name: user.name,
