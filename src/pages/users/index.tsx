@@ -1,5 +1,3 @@
-import { useEffect } from 'react';
-
 import {
   Button,
   Box,
@@ -13,28 +11,31 @@ import {
   Text,
   useBreakpointValue,
 } from '@chakra-ui/react';
+import { useQuery } from 'react-query';
 import { RiPencilLine } from 'react-icons/ri';
 
 import { TableWrapper } from '../../components';
 import { USER_LIST } from '../../constants';
 
 export default function UserList() {
+  const { data, isLoading, error } = useQuery('users', async () => {
+    const response = await fetch('/api/users');
+
+    return response.json();
+  });
+
   const isWideVersion = useBreakpointValue({
     base: false,
     lg: true,
   });
-
-  useEffect(() => {
-    fetch('/api/users')
-      .then(response => response.json())
-      .then(data => console.log(data));
-  }, []);
 
   return (
     <TableWrapper
       title="Usuários"
       createButtonHref="/users/form"
       createButtonText="Criar usuário"
+      isLoading={isLoading}
+      isErrored={!!error}
     >
       <Thead>
         <Tr>
