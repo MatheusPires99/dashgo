@@ -5,3 +5,4 @@ export { Chart } from './Chart';
 export { Pagination } from './Pagination';
 export { TableWrapper } from './TableWrapper';
 export { FormWrapper } from './FormWrapper';
+export { Spinner } from './Spinner';
