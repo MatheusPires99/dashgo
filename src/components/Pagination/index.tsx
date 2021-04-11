@@ -1,6 +1,7 @@
-import { Box, Button, Stack, HStack } from '@chakra-ui/react';
+import { Box, Stack, HStack } from '@chakra-ui/react';
 
 import { PAGINATION } from '../../constants';
+import { PaginationItem } from './PaginationItem';
 
 export function Pagination() {
   return (
@@ -17,28 +18,11 @@ export function Pagination() {
 
       <HStack spacing="2">
         {PAGINATION.map(item => (
-          <Button
+          <PaginationItem
             key={item.page}
-            size="sm"
-            fontSize="xs"
-            width="4"
-            colorScheme="pink"
-            bg={!item.selected && 'gray.700'}
-            _hover={
-              !item.selected && {
-                bg: 'gray.500',
-              }
-            }
-            disabled={item.page === 1}
-            _disabled={
-              item.page === 1 && {
-                bg: 'pink.500',
-                cursor: 'default',
-              }
-            }
-          >
-            {item.page}
-          </Button>
+            number={item.page}
+            isCurrent={item.selected}
+          />
         ))}
       </HStack>
     </Stack>
