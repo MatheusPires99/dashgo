@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Link from 'next/link';
 
 import {
   Button,
@@ -89,16 +90,18 @@ export default function UserList() {
             {isWideVersion && <Td>{user.createdAt}</Td>}
             {isWideVersion && (
               <Td>
-                <Button
-                  as="a"
-                  size="sm"
-                  fontSize="sm"
-                  colorScheme="purple"
-                  leftIcon={<Icon as={RiPencilLine} fontSize="16" />}
-                  onMouseEnter={() => handlePrefetchUser(user.id)}
-                >
-                  Editar
-                </Button>
+                <Link href={`users/form/${user.id}`} passHref>
+                  <Button
+                    as="a"
+                    size="sm"
+                    fontSize="sm"
+                    colorScheme="purple"
+                    leftIcon={<Icon as={RiPencilLine} fontSize="16" />}
+                    onMouseEnter={() => handlePrefetchUser(user.id)}
+                  >
+                    Editar
+                  </Button>
+                </Link>
               </Td>
             )}
           </Tr>

@@ -1,12 +1,14 @@
 import { useRouter } from 'next/router';
 
 import { VStack, SimpleGrid } from '@chakra-ui/react';
+import { useMutation } from 'react-query';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import { FormWrapper } from '../../components';
 import { Input } from '../../components/Form';
 import { USER_FORM_SCHEMA } from '../../schemas';
+import { api, queryClient } from '../../services';
 
 type UserFormData = {
   name: string;
@@ -17,14 +19,35 @@ type UserFormData = {
 
 export default function UserForm() {
   const router = useRouter();
+
+  const createUser = useMutation(
+    async (user: UserFormData) => {
+      const response = await api.post('users', {
+        user: {
+          ...user,
+          created_at: new Date(),
+        },
+      });
+
+      return response.data;
+    },
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries('users');
+      },
+    },
+  );
+
   const { handleSubmit, register, formState } = useForm({
     resolver: yupResolver(USER_FORM_SCHEMA),
   });
 
   const { errors, isSubmitting } = formState;
 
-  const handleSubmitForm: SubmitHandler<UserFormData> = value => {
-    console.log(value);
+  const handleSubmitForm: SubmitHandler<UserFormData> = async value => {
+    await createUser.mutateAsync(value);
+
+    router.push('/users');
   };
 
   function handleCancel() {
